@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+
+.projects-container {
+  background-color: gainsboro;
+}
+
+.create-project, .create-task {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+#create-project-button, #create-task-button {
+  margin-top: 10px;
+}
+
+.projects {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: auto;
+  height: 100px;
+}
