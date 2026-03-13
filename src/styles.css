@@ -26,3 +26,19 @@
   width: auto;
   height: 100px;
 }
+
+.tasks {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.task-card {
+  border: 2px solid gray;
+  border-radius: 10px;
+  width: 400px;
+  padding: 10px;
+}
