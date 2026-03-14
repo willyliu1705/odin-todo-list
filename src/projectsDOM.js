@@ -1,7 +1,7 @@
 import { Project } from "./project.js";
 import { displayTask, tasksDiv } from "./tasksDOM.js";
-import { projectsArray, selectedProject } from "./index.js";
-export { addProject, displayProject };
+import { projectsArray, selectedProject, updateLocalStorage } from "./index.js";
+export { addProject, displayProject, displayAllProjects };
 
 const projectsDiv = document.querySelector(".projects");
 const createProjectButton = document.querySelector("#create-project-button");
@@ -27,10 +27,18 @@ function displayProject(project) {
   projectsDiv.append(singleProjectButton);
 }
 
+function displayAllProjects() {
+  projectsDiv.innerHTML = "";
+  projectsArray.forEach(project => {
+    displayProject(project);
+  });
+}
+
 createProjectButton.addEventListener("click", () => {
   if (inputElement.value !== ""){
-    const newProject = new Project(inputElement.value);
+    const newProject = new Project(inputElement.value, [], null);
     addProject(newProject);
+    updateLocalStorage();
     displayProject(newProject);
   }
 });

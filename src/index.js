@@ -3,16 +3,38 @@ import "./project.js";
 import "./task.js";
 import "./projectsDOM.js";
 import "./tasksDOM.js";
-import { displayProject } from "./projectsDOM.js";
+import { addProject, displayProject, displayAllProjects } from "./projectsDOM.js";
 import { Project } from "./project.js";
-export { projectsArray, selectedProject };
+import { displayProjectTasks } from "./tasksDOM.js";
+export { projectsArray, selectedProject, updateLocalStorage };
 
-const defaultProject = new Project("Default");
-displayProject(defaultProject);
+let projectsArray = [];
 
-const projectsArray = [defaultProject];
-let selectedProject = [`${defaultProject.id}`];
+let selectedProject;
 
-// be able to change a task
-// include date-fns from npm
-// implement localStorage
+// localStorage.clear();
+
+if (!localStorage.getItem("projects")) {
+  const defaultProject = new Project("Default", [], null);
+  selectedProject = [`${defaultProject.id}`];
+  addProject(defaultProject);
+  updateLocalStorage();
+  displayProject(defaultProject);
+  console.log("Previous storage not found");
+} else {
+  const plainProjectsArray = JSON.parse(localStorage.getItem("projects"));
+  plainProjectsArray.forEach(projectObject => {
+    const actualProjectInstance = new Project(projectObject.name, projectObject.todoList, projectObject.id);
+    if (projectObject.name == "Default") {
+      selectedProject = [`${projectObject.id}`];
+    }
+    projectsArray.push(actualProjectInstance);
+  });
+  displayAllProjects();
+  displayProjectTasks();
+  console.log("We found storage");
+}
+
+function updateLocalStorage() {
+  localStorage.setItem("projects", JSON.stringify(projectsArray));
+}

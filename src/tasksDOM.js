@@ -1,6 +1,6 @@
 import { Task } from "./task.js";
-import { projectsArray, selectedProject } from "./index.js";
-export { displayTask, tasksDiv };
+import { projectsArray, selectedProject, updateLocalStorage } from "./index.js";
+export {tasksDiv, displayTask, displayProjectTasks };
 
 const tasksDiv = document.querySelector(".tasks");
 const createTaskButton = document.querySelector("#create-task-button");
@@ -13,6 +13,7 @@ function addTask(task) {
   projectsArray.forEach(project => {
     if (project.id === selectedProject[0]) {
       project.addToList(task);
+      updateLocalStorage();
     }
   });
 }
@@ -21,6 +22,7 @@ function removeTask(task) {
   projectsArray.forEach(project => {
     if (project.id === selectedProject[0]) {
       project.removeFromList(task);
+      updateLocalStorage();
     }
   });
 }
@@ -53,6 +55,17 @@ function displayTask(task) {
   singleTaskDiv.append(priorityDiv);
 
   tasksDiv.append(singleTaskDiv);
+}
+
+function displayProjectTasks() {
+  tasksDiv.innerHTML = "";
+  projectsArray.forEach(project => {
+    if (project.id === selectedProject[0]) {
+      project.todoList.forEach(task => {
+        displayTask(task);
+      });
+    }
+  });
 }
 
 createTaskButton.addEventListener("click", () => {
