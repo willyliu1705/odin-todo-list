@@ -10,9 +10,17 @@ const dueDateInput = document.querySelector("#due-date");
 const priorityInput = document.querySelector("#priority"); 
 
 function addTask(task) {
-  projectsArray.forEach(element => {
-    if (element.id === selectedProject[0]) {
-      element.updateTodoList(task);
+  projectsArray.forEach(project => {
+    if (project.id === selectedProject[0]) {
+      project.addToList(task);
+    }
+  });
+}
+
+function removeTask(task) {
+  projectsArray.forEach(project => {
+    if (project.id === selectedProject[0]) {
+      project.removeFromList(task);
     }
   });
 }
@@ -24,8 +32,9 @@ function displayTask(task) {
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "X";
   deleteButton.classList.add("delete-button");
-  deleteButton.addEventListener("click", () => {
+  deleteButton.addEventListener("click", function() {
     singleTaskDiv.remove();
+    removeTask(task);
   });
 
   const titleDiv = document.createElement("div");

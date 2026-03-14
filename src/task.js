@@ -3,12 +3,14 @@ export class Task {
   #description;
   #dueDate;
   #priority;
+  #id
 
   constructor (title, description, dueDate, priority) {
     this.#title = title;
     this.#description = description;
     this.#dueDate = dueDate;
     this.#priority = priority;
+    this.#id = crypto.randomUUID();
   }
 
   get title() {

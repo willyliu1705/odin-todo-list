@@ -21,7 +21,13 @@ export class Project {
     return this.#id;
   }
 
-  updateTodoList(task) {
+  addToList(task) {
     this.#todoList.push(task);
+  }
+
+  removeFromList(task) {
+    const index = this.#todoList.findIndex(existingTask => existingTask.id === task.id);
+    this.#todoList.splice(index, 1);
+    console.log(this.#todoList);
   }
 }

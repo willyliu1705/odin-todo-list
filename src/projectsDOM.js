@@ -1,6 +1,7 @@
 import { Project } from "./project.js";
 import { displayTask, tasksDiv } from "./tasksDOM.js";
 import { projectsArray, selectedProject } from "./index.js";
+export { addProject, displayProject };
 
 const projectsDiv = document.querySelector(".projects");
 const createProjectButton = document.querySelector("#create-project-button");
